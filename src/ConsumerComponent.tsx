@@ -1,19 +1,27 @@
-import { useContext } from "react";
-import { SettingsContext } from "./SettingsContext";
+import { useSettings } from "./useSettings";
 
 const ConsumerComponent = () => {
-  const settings = useContext(SettingsContext);
+  const settings = useSettings();
+
+  const someSetting = settings.someSetting;
 
   const toggleSetting = () => {
-    settings.setSomeSetting(settings.someSetting === "ON" ? "OFF" : "ON");
+    settings.setSomeSetting(someSetting === "ON" ? "OFF" : "ON");
   };
 
   return (
     <div>
-      <div style={{ background: "red", padding: "20px" }}>
-        {settings.someSetting}
+      <div
+        style={{
+          background: someSetting === "ON" ? "green" : "red",
+          padding: "20px",
+        }}
+      >
+        {someSetting}
       </div>
-      <button onClick={toggleSetting}>Toggle setting ON/OFF</button>
+      <button onClick={toggleSetting}>
+        Toggle setting {someSetting === "ON" ? "OFF" : "ON"}
+      </button>
     </div>
   );
 };
